@@ -5,9 +5,7 @@ from sqlalchemy.sql.sqltypes import Integer, Unicode
 Base = declarative_base()
 
 
-class HiraganaLetter(Base):
-    __tablename__ = 'hiragana_cards'
-
+class Card:
     id = Column('id', Integer, primary_key=True)
     transcription = Unicode(length=5)
     cyrillic = Unicode(length=5)
@@ -21,3 +19,11 @@ class HiraganaLetter(Base):
         self.transcription = transcription
         self.original_appearance = original_appearance
         self.cyrillic = cyrrilic
+
+
+class HiraganaLetter(Base, Card):
+    __tablename__ = 'hiragana_cards'
+
+
+class KatakanaLetter(Base, Card):
+    __tablename__ = 'katakana_cards'
