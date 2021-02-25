@@ -10,7 +10,7 @@ PASSWD = getenv('PASSWORD')
 HOST = getenv('HOST')
 USER = getenv('USER')
 NAME = getenv('NAME')
-print(NAME)
+
 engine = sqlalchemy.create_engine(
     f'postgresql://{USER}:{PASSWD}@{HOST}/{NAME}',
     execution_options={

@@ -1,6 +1,7 @@
-from sqlalchemy import Column, String, Integer
+from sqlalchemy import Column, Integer
+from sqlalchemy import UniqueConstraint
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship
+from sqlalchemy import UniqueConstraint
 from sqlalchemy.sql.sqltypes import Integer, Unicode
 Base = declarative_base()
 
@@ -9,7 +10,7 @@ class Card:
     id = Column('id', Integer, primary_key=True)
     transcription = Unicode(length=5)
     cyrillic = Unicode(length=5)
-    original_appearance = Unicode(length=1)
+    original_appearance = Column('original_appearance', Unicode(length=1), unique=True)
 
     def __init__(self,
         transcription: str,
