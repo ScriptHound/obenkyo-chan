@@ -1,16 +1,18 @@
 from dotenv import load_dotenv
+from pathlib import Path
 from os import getenv
 import sqlalchemy
 
-load_dotenv()
+env_path = Path('.') / 'config/.env'
+load_dotenv(dotenv_path=env_path)
 
-PASSWD = getenv('password')
-HOST = getenv('host')
-PORT = getenv('port')
-USER = getenv('user')
-
+PASSWD = getenv('PASSWORD')
+HOST = getenv('HOST')
+USER = getenv('USER')
+NAME = getenv('NAME')
+print(NAME)
 engine = sqlalchemy.create_engine(
-    f'postgresql://{USER}:{PASSWD}@{HOST}/telega',
+    f'postgresql://{USER}:{PASSWD}@{HOST}/{NAME}',
     execution_options={
         "isolation_level": "REPEATABLE_READ"
     }

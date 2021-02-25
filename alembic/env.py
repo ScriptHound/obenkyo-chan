@@ -27,7 +27,7 @@ sys.path.append(os.getcwd())
 # from alembic.models import Base
 # target_metadata = None
 
-from .models.cards import Base
+from models.cards import Base
 from db_config import engine
 target_metadata = Base.metadata
 
