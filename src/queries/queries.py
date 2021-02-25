@@ -12,7 +12,7 @@ class Card:
 
     def __init__(self) -> None:
         pass
-    
+
     @classmethod
     def create(cls, session, japanese: str, latin: str, cyrrilic: str = "N/A") -> None:
         card = cls(latin, japanese, cyrrilic)

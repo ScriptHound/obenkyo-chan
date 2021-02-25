@@ -20,6 +20,15 @@ class Card:
         self.original_appearance = original_appearance
         self.cyrillic = cyrrilic
 
+    def __repr__(self):
+        return f"""<Letter
+                    original_appearance={self.original_appearance},
+                    transcription={self.transcription}
+                >"""
+
+    def __str__(self):
+        return str(self.original_appearance)
+
 
 class HiraganaLetter(Base, Card):
     __tablename__ = 'hiragana_cards'

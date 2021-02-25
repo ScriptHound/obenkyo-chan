@@ -1,5 +1,6 @@
 from typing import Any, Callable
 import logging
+import random
 
 from vkbottle.bot import BotLabeler, Message
 from sqlalchemy.orm import session, sessionmaker
@@ -22,7 +23,6 @@ def handle_session(query: Callable, *args) -> Any:
         session.expunge_all()
 
         session.commit()
-        logging.info("Query successed")
 
     except Exception:
         session.rollback()
@@ -34,8 +34,17 @@ def handle_session(query: Callable, *args) -> Any:
     return result
 
 
+def create_letters_poll() -> dict:
+    letters = [handle_session(HiraganaCard().get_random)
+                                      for _ in range(4)]
+    return {number: letter for number, letter in enumerate(letters)}
+
+
 @bl.message(text=["Дай карточку"])
 async def greeting(message: Message):
-    symbol = handle_session(HiraganaCard().get_random)
-    letter = symbol.original_appearance
-    await message.answer(f"Вот держи! {letter}")
+    poll: dict = create_letters_poll()
+    right_answer: HiraganaCard = random.choice(poll).transcription
+
+    poll = "\n"+"\n".join(
+        [f"{n}. {letter}" for n, letter in poll.items()])
+    await message.answer(f"Я загадала {right_answer}! {poll}")
