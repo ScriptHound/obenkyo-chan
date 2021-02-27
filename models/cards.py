@@ -24,7 +24,7 @@ class Card:
         return f"""<Letter
                     original_appearance={self.original_appearance},
                     transcription={self.transcription}
-                >"""
+                    >"""
 
     def __str__(self):
         return str(self.original_appearance)
