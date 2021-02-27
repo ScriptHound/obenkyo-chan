@@ -5,7 +5,7 @@ from vkbottle_types import BaseStateGroup
 from vkbottle.bot import Blueprint, Message
 from sqlalchemy.orm import sessionmaker
 
-from src.queries.queries import HiraganaCard
+from src.queries.queries import HiraganaCard, KatakanaCard
 from src.templates.poll_templates import (
     create_letters_poll,
     create_poll_template
@@ -22,6 +22,13 @@ class QuizStates(BaseStateGroup):
     FREE_STATE = 1
 
 
+def define_card_class(message_text: str) -> 'Class':
+    if message_text == "Хирагана":
+        return HiraganaCard
+    elif message_text == "Катакана":
+        return KatakanaCard
+
+
 @bl.on.message(state=QuizStates.QUIZ_STATE, text=["0", "1", "2", "3"])
 async def quiz_handler(message: Message, **args):
     user_answer = args.get("user_answer")
@@ -34,11 +41,13 @@ async def quiz_handler(message: Message, **args):
         await message.answer("Неправильно...")
 
 
-@bl.on.message(text=["Хирагана"])
+@bl.on.message(text=["Хирагана", "Катакана"])
 async def greeting(message: Message):
-    poll: dict = create_letters_poll(HiraganaCard, Session, engine)
+    card_class = define_card_class(message.text)
+
+    poll: dict = create_letters_poll(card_class, Session, engine)
     right_answer_index: int = random.choice(list(poll.keys()))
-    right_answer: HiraganaCard = poll[right_answer_index].transcription
+    right_answer: card_class = poll[right_answer_index].transcription
 
     poll = create_poll_template(poll)
 

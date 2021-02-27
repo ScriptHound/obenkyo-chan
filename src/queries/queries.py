@@ -2,7 +2,6 @@ from __future__ import annotations
 from typing import Dict, List
 import random
 
-from sqlalchemy.sql.expression import func
 
 from models.cards import HiraganaLetter, KatakanaLetter
 

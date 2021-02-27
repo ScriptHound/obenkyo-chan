@@ -1,6 +1,5 @@
 from vkbottle import BaseReturnManager
 from vkbottle.bot import Message
-from src.routes.middlewares import OnAnswerMiddleware
 from caches.main import cache
 
 

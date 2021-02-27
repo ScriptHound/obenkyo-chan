@@ -1,6 +1,6 @@
 from vkbottle import BaseMiddleware
 from vkbottle.bot import Message
-from src.routes.learn_hiragana import QuizStates
+from src.routes.learn_from_transcript import QuizStates
 from caches.main import cache
 
 

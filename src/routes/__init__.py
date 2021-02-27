@@ -1,3 +1,2 @@
-from . import learn_hiragana
-from . import learn_katakana
-blueprints = [learn_hiragana.bl, learn_katakana.bl]
+from . import learn_from_transcript
+blueprints = [learn_from_transcript.bl]
