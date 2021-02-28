@@ -3,4 +3,3 @@
 По стеку: alembic + SQLAlchemy + Redis + Postgresql + vkbottle.
 Девопсовские приблуды: docker, docker-compose, dotenv, poetry
 
-Живёт по адресу - https://vk.com/obenkyo
