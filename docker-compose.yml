@@ -1,0 +1,37 @@
+version: '3'
+services: 
+  postgres:
+    image: postgres
+    expose:
+      - "5430"
+    restart: always
+    environment: 
+      - POSTGRES_DB=obenkyo
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_PORT=5430
+    volumes: 
+    - database-data:/var/lib/postgresql/data/obenkyo
+
+  redis:
+    image: redis
+    command: redis-server
+    expose:
+      - "6379"
+    volumes:
+      - $PWD/redis-data:/var/lib/redis
+      - $PWD/redis.conf:/usr/local/etc/redis/redis.conf
+
+  obenkyo:
+    build: .
+    command: bash -c "alembic upgrade head &&
+                      python main.py"
+    env_file:
+      - ./config/.env
+    hostname: $HOSTNAME
+    depends_on: 
+      - redis
+      - postgres
+
+volumes: 
+  database-data:

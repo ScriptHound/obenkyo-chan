@@ -6,7 +6,7 @@ EXPIRATION_TIMEOUT = 120
 
 class Cache:
     def __init__(self) -> None:
-        self.__redis = redis.Redis(host='localhost', port=6379, db=0)
+        self.__redis = redis.Redis(host='redis', port=6379, db=0)
 
     def set(self, key: Any, value: Any) -> None:
         self.__redis.set(key, value)
