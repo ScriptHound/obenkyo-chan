@@ -2,7 +2,7 @@ from logging.config import fileConfig
 
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
-
+from sqlalchemy import MetaData
 from alembic import context
 
 # this is the Alembic Config object, which provides
@@ -27,9 +27,20 @@ sys.path.append(os.getcwd())
 # from alembic.models import Base
 # target_metadata = None
 
-from models.cards import Base
+from models.base import Base
+from models.cards import HiraganaLetter, KatakanaLetter, Card
+from models.kanji_cards import (
+    KanjiCard,
+    JapReading,
+    Meaning,
+    jap_reading_associate,
+    association_table
+)
 from db_config import engine
+
+
 target_metadata = Base.metadata
+
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:

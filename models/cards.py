@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.sql.sqltypes import Integer, UnicodeText
-Base = declarative_base()
+
+from models.base import Base
 
 
 class Card:
