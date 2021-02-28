@@ -32,7 +32,7 @@ class Card:
         rand_index = random.randint(1, table_length-1)
         return session.query(
                     self.model_class).filter(
-                        self.model_class.id==rand_index).one()
+                        self.model_class.id == rand_index).one()
 
     def delete(self, session, card: str) -> None:
         card = self.get(session, card)

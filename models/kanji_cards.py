@@ -58,6 +58,9 @@ class Meaning(Base):
                           back_populates="meanings"
                           )
 
+    def __init__(self, meaning: str) -> None:
+        self.meaning = meaning
+
 
 class JapReading(Base):
     __tablename__ = "reading"
@@ -67,3 +70,6 @@ class JapReading(Base):
                           secondary=jap_reading_associate,
                           back_populates="readings"
                           )
+
+    def __init__(self, reading: str) -> None:
+        self.reading = reading
